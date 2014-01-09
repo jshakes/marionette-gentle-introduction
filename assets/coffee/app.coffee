@@ -7,30 +7,65 @@ ContactManager.addRegions
 
 # Declare our models
 
-ContactManager.Contact = Backbone.Model.extend({})
+ContactManager.Contact = Backbone.Model.extend
+  defaults:
+    firstName: ""
+    lastName: ""
 
 # Declare our views
 
 ContactManager.StaticView = Marionette.ItemView.extend
   template: "#static-template"
 
-ContactManager.ContactView = Marionette.ItemView.extend
-  template: "#contact-template"
+ContactManager.ContactItemView = Marionette.ItemView.extend
+  template: "#contact-list-item"
+  tagName: "li"
+  events:
+    "click p": "alertPhoneNumber"
+
+  alertPhoneNumber: ->
+    alert @model.escape("phoneNumber")
+
+ContactManager.ContactsView = Marionette.CollectionView.extend
+  tagName: "ul"
+  itemView: ContactManager.ContactItemView
+
+# Declare our collections
+
+ContactManager.ContactCollection = Backbone.Collection.extend
+  model: ContactManager.Contact
 
 # Init
 
 ContactManager.on "initialize:after", ->
-  
-  # Create a new contact and a view
 
-  alice = new ContactManager.Contact
-    firstName: "Alice"
-    lastName: "Arten"
-    phoneNumber: "555-0184"
+  # Create the contact data
+  contactJSON = [
+    {
+      firstName: "Bob"
+      lastName: "Brigham"
+      phoneNumber: "555-0163"
+    },
+    {
+      firstName: "Alice",
+      lastName: "Arten",
+      phoneNumber: "555-0184"
+    },
+    {
+      firstName: "Charlie",
+      lastName: "Campbell",
+      phoneNumber: "555-0129"
+    }
+  ]
 
-  aliceView = new ContactManager.ContactView
-    model: alice
+  # Create a collection with the data
+  contacts = new ContactManager.ContactCollection contactJSON
 
-  ContactManager.mainRegion.show aliceView
+  # Create a collection view to display this data
+  contactsListView = new ContactManager.ContactsView
+    collection: contacts
+
+  # Show the collection view in the main region
+  ContactManager.mainRegion.show contactsListView
 
 ContactManager.start()
