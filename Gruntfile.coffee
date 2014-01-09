@@ -4,6 +4,8 @@ module.exports = (grunt) ->
     pkg: grunt.file.readJSON("package.json")
 
     coffee:
+      options:
+        bare: true
       compile:
         files:
           "assets/js/app.js": "assets/coffee/**/*.coffee"

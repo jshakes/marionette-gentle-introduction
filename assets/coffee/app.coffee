@@ -5,12 +5,6 @@ ContactManager = new Marionette.Application()
 ContactManager.addRegions
   mainRegion: "#main-region"
 
-# Declare our models
-
-ContactManager.Contact = Backbone.Model.extend
-  defaults:
-    firstName: ""
-    lastName: ""
 
 # Declare our views
 
@@ -29,11 +23,6 @@ ContactManager.ContactItemView = Marionette.ItemView.extend
 ContactManager.ContactsView = Marionette.CollectionView.extend
   tagName: "ul"
   itemView: ContactManager.ContactItemView
-
-# Declare our collections
-
-ContactManager.ContactCollection = Backbone.Collection.extend
-  model: ContactManager.Contact
 
 # Init
 
@@ -59,7 +48,7 @@ ContactManager.on "initialize:after", ->
   ]
 
   # Create a collection with the data
-  contacts = new ContactManager.ContactCollection contactJSON
+  contacts = new ContactManager.Entities.ContactCollection contactJSON
 
   # Create a collection view to display this data
   contactsListView = new ContactManager.ContactsView
@@ -67,5 +56,3 @@ ContactManager.on "initialize:after", ->
 
   # Show the collection view in the main region
   ContactManager.mainRegion.show contactsListView
-
-ContactManager.start()
