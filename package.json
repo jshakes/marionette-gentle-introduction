@@ -1,0 +1,23 @@
+{
+  "name": "marionette-gentle-introduction",
+  "version": "0.0.0",
+  "description": "marionette-gentle-introduction ==============================",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jshakes/marionette-gentle-introduction.git"
+  },
+  "author": "James Shakespeare",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/jshakes/marionette-gentle-introduction/issues"
+  },
+  "dependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-coffee": "~0.8.0"
+  }
+}
